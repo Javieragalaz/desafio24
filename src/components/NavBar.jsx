@@ -18,13 +18,16 @@ export default function NavbBar() {
 
     <div>
 
-      <Navbar bg="danger">
+      <Navbar bg="danger" >
 
-        <Container>
+        <Container >
 
-          <NavLink to="/" className={({ isActive }) => isActive ? "active" : "not-active"}> The Real Pizza</NavLink>
+    
 
-          <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "not-active"}> $ {totalPrice}🛒</NavLink>
+          <NavLink to="/"  className=  {({ isActive }) => isActive ? "active" : "not-active" }> 🍕 The REAL Pizza</NavLink>
+
+          <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "not-active"}> $ {totalPrice} 🛒</NavLink>
+        
 
         </Container>
 

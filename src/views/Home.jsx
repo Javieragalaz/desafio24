@@ -12,10 +12,11 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
+import CardGroup from 'react-bootstrap/CardGroup';
 
 export default function Home() {
 
-    const [pizzas, addToCart, setPizzaArray, setTotalPrice] = useContext(PizzaContext);
+    const {pizzas, addToCart, setPizzaArray, setTotalPrice} = useContext(PizzaContext);
 
 
     return (
@@ -23,14 +24,16 @@ export default function Home() {
         <div>
 
             <header className="header">
-                <h1>¡Pizzería The Real Pizza</h1>
-                <h4>¡Aquí encontrarás LA PIZZA que buscas!</h4>
+                <h1>¡Pizzería The Real Pizza!</h1>
+                <h4>¡Here you'll find the pizza you are looking for!</h4>
             </header>
 
 
-            <Container className="mt-4"> {pizzas.map((pizza) => (
+            <Container>
+            
+            <CardGroup className="m-1"> {pizzas.map((pizza) => (
 
-                <Card style={{ width: '18rem' }} key={pizza.id} >
+                <Card className = ' m-1 ' style={{ width: '18rem' }} key={pizza.id} >
 
                     <Card.Img variant="top" src={pizza.img} />
 
@@ -49,17 +52,18 @@ export default function Home() {
 
                             <Link to={`/pizza/${pizza.id}`}>
 
-                                <Button className='btn-see-more'>Ver más</Button>
+                                <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Ver más 🔎</Button>
 
                             </Link>
 
-                            <Button className='btn-add' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Añadir</Button>
+                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Añadir 💙 </Button>
 
                         </Card.Body>
                     </Card.Body>
 
                 </Card>))}
-
+           </CardGroup>
+           
             </Container >
         </div >
     )

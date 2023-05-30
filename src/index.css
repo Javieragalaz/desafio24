@@ -1,0 +1,10 @@
+.header {
+    background-image: url("./assets/imgs/pizza1.jpeg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px;
+    text-align: start;
+  
+  }
+

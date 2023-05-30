@@ -1,5 +1,6 @@
 //LIBRERIAS
-import { useContext } from "react"
+import { useContext } from "react";
+import { useState } from "react";
 
 
 //ESTILOS
@@ -36,6 +37,7 @@ export default function ShoppingCart ()  {
           count: count,
           result: count * index.price
         }
+
         list.push(newCartList)
         count = 1
       }

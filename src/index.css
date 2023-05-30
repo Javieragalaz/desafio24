@@ -26,9 +26,10 @@ a:hover{
   color: yellowgreen;
 }
 
-.Card-Title{
+.Card.Body .Card-Title{
 
   font-weight: bold;
+  text-align: center;
 }
 
 .listGroup {
@@ -36,14 +37,12 @@ a:hover{
  font-weight: bolder;
 }
 
-span{
-  font-weight: 900;
-}
 
-.list-group-flush{
+.list-group-flush span{
 
   text-align: center;
-  font-weight: bolder;
+  font-weight: bold;
+  margin-top: 40px;
 }
 
 
@@ -51,7 +50,7 @@ span{
   background-color:rgb(88, 9, 133);
   color: rgb(255, 255, 255);
  
-  padding: 2px;
+ 
 
   font-size: small;
 }
@@ -66,5 +65,4 @@ background-color: rgb(247, 124, 8);
 
   font-size: small;
 }
-
 

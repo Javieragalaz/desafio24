@@ -31,7 +31,7 @@ export default function Home() {
 
             <Container>
             
-            <CardGroup className="m-1"> {pizzas.map((pizza) => (
+            <CardGroup className="m-1 text-align-center"> {pizzas.map((pizza) => (
 
                 <Card className = ' m-1 ' style={{ width: '18rem' }} key={pizza.id} >
 
@@ -44,7 +44,7 @@ export default function Home() {
 
                         {pizza.ingredients.map((ingredients) => (
 
-                            <ListGroup.Item>{ingredients}</ListGroup.Item>))}
+                            <ListGroup.Item> 🍕 {ingredients}</ListGroup.Item>))}
 
                         <ListGroup className="list-group-flush"><span>${pizza.price}</span></ListGroup>
 
@@ -52,11 +52,11 @@ export default function Home() {
 
                             <Link to={`/pizza/${pizza.id}`}>
 
-                                <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Ver más 🔎</Button>
+                                <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Details 🔎</Button>
 
                             </Link>
 
-                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Añadir 💙 </Button>
+                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Add 💙 </Button>
 
                         </Card.Body>
                     </Card.Body>

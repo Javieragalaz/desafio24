@@ -29,6 +29,7 @@ export default function NavbBar() {
           <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "not-active"}> $ {totalPrice} 🛒</NavLink>
         
 
+        
         </Container>
 
       </Navbar>

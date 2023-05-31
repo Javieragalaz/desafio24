@@ -1,6 +1,6 @@
 //LIBRERIAS
 import { useContext } from "react"
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 //CONTEXTO
@@ -35,28 +35,28 @@ export default function Home() {
 
                 <Card className = ' m-1 ' style={{ width: '18rem' }} key={pizza.id} >
 
-                    <Card.Img variant="top" src={pizza.img} />
+                    <Card.Img variant="top"  src={pizza.img} />
 
                     <Card.Body>
-                        <Card.Title>{pizza.name}</Card.Title>
+                        <Card.Title className = ' text-capitalize text-center '>{pizza.name}</Card.Title>
 
-                        <ListGroup className="list-group-flush"> Ingredients </ListGroup>
+                        <ListGroup className="list-group-flush p-3 text-center text-decoration-underline"> Ingredients </ListGroup>
 
                         {pizza.ingredients.map((ingredients) => (
 
-                            <ListGroup.Item> 🍕 {ingredients}</ListGroup.Item>))}
+                            <ListGroup.Item className = ' text-capitalize '> 🍕 {ingredients}</ListGroup.Item>))}
 
-                        <ListGroup className="list-group-flush"><span>${pizza.price}</span></ListGroup>
+                        <ListGroup className="list-group-flush"><span>Price $ {pizza.price}</span></ListGroup>
 
                         <Card.Body>
 
-                            <Link to={`/pizza/${pizza.id}`}>
+                            <NavLink to={`/pizza/${pizza.id}`}>
 
                                 <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Details 🔎</Button>
 
-                            </Link>
+                            </NavLink>
 
-                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Add 💙 </Button>
+                            <Button className='btn-add m-2 px-3 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Add  💙 </Button>
 
                         </Card.Body>
                     </Card.Body>
@@ -68,5 +68,3 @@ export default function Home() {
         </div >
     )
 }
-
-

@@ -1,81 +1,70 @@
 //LIBRERIAS
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext } from "react"
+import { Link } from 'react-router-dom';
 
-
-//ESTILOS
-
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
 
 //CONTEXTO
-
 import { PizzaContext } from "../Context";
 
-export default function ShoppingCart ()  {
+//ESTILOS
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
-  const { setCart, addToCart, removePizza, totalPrice, setTotalPrice, addedPizza, setPizzaArray } = useContext(PizzaContext)
+import CardGroup from 'react-bootstrap/CardGroup';
 
-  let list = []
-  let count = 1
+export default function Home() {
 
-  const cartList = () => {
-    for (let i = 0; i < addedPizza.length; i++) {
-      let index = addedPizza[i];
+    const {pizzas, addToCart, setPizzaArray, setTotalPrice} = useContext(PizzaContext);
 
-      if (index  === addedPizza[i + 1]) {
-        count++
-      }
-      else {
-        const newCartList = {
-          id: index.id,
-          name: index.name,
-          price: index.price,
-          img: index.img,
-          count: count,
-          result: count * index.price
-        }
 
-        list.push(newCartList)
-        count = 1
-      }
-    }
-  }
+    return (
 
-  cartList();
-  setCart(addedPizza);
+        <div>
 
-  return (
+            <header className="header">
+                <h1>¡Pizzería The Real Pizza!</h1>
+                <h4>¡Here you'll find the pizza you are looking for!</h4>
+            </header>
 
-    <div>
 
-      <Container className="mt-3">
-        <Card>
+            <Container>
+            
+            <CardGroup className="m-1 text-align-center"> {pizzas.map((pizza) => (
 
-          <Card.Body>
-          {list.map((pizza) => (
-            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
-             
-                <ListGroup.Item variant="primary">Products details</ListGroup.Item>
-                <ListGroup.Item variant="primary"><img src="{pizza.img}" alt="" /></ListGroup.Item>
-                <ListGroup.Item variant="primary">{pizza.name}</ListGroup.Item>
-                <ListGroup.Item variant="primary">${pizza.result}</ListGroup.Item>
+                <Card className = ' m-1 ' style={{ width: '18rem' }} key={pizza.id} >
 
+                    <Card.Img variant="top" src={pizza.img} />
+
+                    <Card.Body>
+                        <Card.Title>{pizza.name}</Card.Title>
+
+                        <ListGroup className="list-group-flush"> Ingredients </ListGroup>
+
+                        {pizza.ingredients.map((ingredients) => (
+
+                            <ListGroup.Item> 🍕 {ingredients}</ListGroup.Item>))}
+
+                        <ListGroup className="list-group-flush"><span>${pizza.price}</span></ListGroup>
+
+                        <Card.Body>
+
+                            <Link to={`/pizza/${pizza.id}`}>
+
+                                <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Details 🔎</Button>
+
+                            </Link>
+
+                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Add 💙 </Button>
+
+                        </Card.Body>
+                    </Card.Body>
+
+                </Card>))}
+           </CardGroup>
            
-
-              <Button variant="primary" onClick = {() => {removePizza (pizza.id)}}> - </Button>
-              <ListGroup.Item variant="primary">{pizza.count}</ListGroup.Item>
-              <Button variant="primary" onClick = {() => {addToCart (pizza.id), setTotalPrice (setPizzaArray(pizza.id))}}> + </Button>
-
-
-            </ListGroup.Item>))}
-          </Card.Body>
-          <ListGroup.Item variant="primary">Total: ${totalPrice}</ListGroup.Item>
-          <button>ir a pagar</button>
-        </Card>
-      </Container>
-    </div>
-  )
+            </Container >
+        </div >
+    )
 }

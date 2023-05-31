@@ -26,11 +26,7 @@ a:hover{
   color: yellowgreen;
 }
 
-.Card.Body .Card-Title{
 
-  font-weight: bold;
-  text-align: center;
-}
 
 .listGroup {
 
@@ -65,4 +61,5 @@ background-color: rgb(247, 124, 8);
 
   font-size: small;
 }
+
 

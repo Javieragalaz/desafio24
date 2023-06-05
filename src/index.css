@@ -62,4 +62,10 @@ background-color: rgb(247, 124, 8);
   font-size: small;
 }
 
+.pizzaCart img{
+  height: 70px;
+  width: auto;
+ margin-left: 70px;
+
+}
 

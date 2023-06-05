@@ -1,70 +1,92 @@
 //LIBRERIAS
-import { useContext } from "react"
-import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { useState } from "react";
+
+
+//ESTILOS
+
+
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 
 //CONTEXTO
+
 import { PizzaContext } from "../Context";
 
-//ESTILOS
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
+export default function ShoppingCart() {
 
-import CardGroup from 'react-bootstrap/CardGroup';
+    const { setCart, addToCart, removePizza, totalPrice, setTotalPrice, addedPizza, setPizzaArray } = useContext(PizzaContext)
 
-export default function Home() {
+    let list = []
+    let count = 1
 
-    const {pizzas, addToCart, setPizzaArray, setTotalPrice} = useContext(PizzaContext);
+    const cartList = () => {
+        for (let i = 0; i < addedPizza.length; i++) {
+            let index = addedPizza[i];
 
+            if (index === addedPizza[i + 1]) {
+                count++
+            }
+            else {
+                const newCartList = {
+                    id: index.id,
+                    name: index.name,
+                    price: index.price,
+                    img: index.img,
+                    count: count,
+                    result: count * index.price
+                }
+
+                list.push(newCartList)
+                count = 1
+            }
+        }
+    }
+
+    cartList();
+    setCart(addedPizza);
 
     return (
 
         <div>
 
-            <header className="header">
-                <h1>¡Pizzería The Real Pizza!</h1>
-                <h4>¡Here you'll find the pizza you are looking for!</h4>
-            </header>
+            <Table striped bordered hover size="sm" >
+
+                <thead>
+
+                    <tr>
+                        <th>Pizza</th>
+                        <th>Pizza Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {list.map((pizza) => (
+                        <tr>
+                            <td className="pizzaCart"><img src={pizza.img} alt=""/></td>
+                            <td>{pizza.name}</td>
+                            <td>${pizza.result}</td>
+                            <td> <Button variant="primary" onClick={() => { removePizza(pizza.id) }}> - </Button></td>
+                            <td>{pizza.count} </td>
+                            <td> <Button variant="primary" onClick={() => { addToCart(pizza.id), setTotalPrice(setPizzaArray(pizza.id)) }}> + </Button></td>
+                        </tr>
+                    ))} </tbody>
 
 
-            <Container>
-            
-            <CardGroup className="m-1 text-align-center"> {pizzas.map((pizza) => (
+          
+            <h4>
+                Total: ${totalPrice}
+            </h4>
 
-                <Card className = ' m-1 ' style={{ width: '18rem' }} key={pizza.id} >
+            <Button>ir a pagar</Button>
 
-                    <Card.Img variant="top" src={pizza.img} />
 
-                    <Card.Body>
-                        <Card.Title>{pizza.name}</Card.Title>
-
-                        <ListGroup className="list-group-flush"> Ingredients </ListGroup>
-
-                        {pizza.ingredients.map((ingredients) => (
-
-                            <ListGroup.Item> 🍕 {ingredients}</ListGroup.Item>))}
-
-                        <ListGroup className="list-group-flush"><span>${pizza.price}</span></ListGroup>
-
-                        <Card.Body>
-
-                            <Link to={`/pizza/${pizza.id}`}>
-
-                                <Button className='btn-detail m-2 ps-2 pe-2 pb-1 pt-1' >Details 🔎</Button>
-
-                            </Link>
-
-                            <Button className='btn-add m-2 px-2 ' onClick={() => { addToCart(pizza.id); setTotalPrice(setPizzaArray(pizza.id)) }}>Add 💙 </Button>
-
-                        </Card.Body>
-                    </Card.Body>
-
-                </Card>))}
-           </CardGroup>
-           
-            </Container >
+        </Table>
+      
         </div >
+
     )
+
 }
